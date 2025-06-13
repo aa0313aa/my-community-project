@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        {% for category, posts_in_category in category_post_list.items %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header fw-bold bg-light">
+                        <a href="{% url 'post_list_by_category' category.id %}" class="text-decoration-none text-dark">{{ category.name }}</a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for post in posts_in_category %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="{% url 'post_detail' post.pk %}" class="text-decoration-none text-body">{{ post.title }}</a>
+                                <span class="badge bg-secondary rounded-pill">{{ post.author.username }}</span>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item text-muted">게시글이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

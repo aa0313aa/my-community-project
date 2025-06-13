@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}커뮤니티 게시판{% endblock %}
+{% block title %}카테고리별 게시글 목록{% endblock %}
 {% block content %}
 <div class="container">
-    <h1 class="my-4">자유게시판</h1>
+    <h1 class="my-4">{{ target_category.name }}</h1>
 
     <div class="my-3">
-        <a href="{% url 'post_list' %}" class="btn btn-outline-primary btn-sm">전체보기</a>
+        <a href="/" class="btn btn-outline-primary btn-sm">전체보기</a>
         {% for c in categories %}
             <a href="{% url 'post_list_by_category' c.id %}" class="btn btn-outline-secondary btn-sm">{{ c.name }}</a>
         {% endfor %}
@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td class="text-start">
-                    <a href="/posts/{{ post.pk }}/" class="text-decoration-none text-dark">{{ post.title }}</a>
+                    <a href="{% url 'post_detail' post.pk %}" class="text-decoration-none text-dark">{{ post.title }}</a>
                 </td>
                 <td>{{ post.created_at|date:"Y-m-d" }}</td>
             </tr>
@@ -37,7 +37,7 @@
     </table>
 
     <div class="d-flex justify-content-end my-3">
-        <a href="/posts/new/" class="btn btn-primary">글쓰기</a>
+        <a href="{% url 'post_create' %}" class="btn btn-primary">글쓰기</a>
     </div>
 </div>
 {% endblock %}
