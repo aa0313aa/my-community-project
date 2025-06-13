@@ -19,6 +19,8 @@ from django.urls import path, include  # <-- include를 추가!
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('posts/', include('posts.urls')), # <-- 이 줄을 추가!
-    path('summernote/', include('django_summernote.urls')), # Summernote 에디터 URL 추가
+    path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('posts/', include('posts.urls')),
+    path('', include('posts.urls')),  # 루트로 들어오면 posts.urls로 연결
 ]
