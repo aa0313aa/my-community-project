@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">
+            {% if form.instance.pk %}글 수정하기{% else %}새 글 작성{% endif %}
+        </h1>
+        
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
+            {{ form.media }}
+            
+            {{ form.as_p }}
+
+            <div class="flex justify-end gap-3 pt-4">
+                <a href="javascript:history.back();" class="px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-md hover:bg-gray-300">취소</a>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700">
+                    {% if form.instance.pk %}수정하기{% else %}등록하기{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 모든 label 태그를 찾아서 스타일을 적용합니다.
+    document.querySelectorAll('form p label').forEach(function(label) {
+        label.classList.add('block', 'text-sm', 'font-medium', 'text-gray-700', 'mb-1');
+    });
+    // 모든 input, select, textarea 태그를 찾아서 스타일을 적용합니다.
+    document.querySelectorAll('form input, form select, form textarea').forEach(function(input) {
+        // Summernote가 생성하는 에디터 관련 요소는 제외합니다.
+        if (!input.closest('.note-editor')) {
+             input.classList.add('block', 'w-full', 'rounded-md', 'border-gray-300', 'shadow-sm', 'focus:border-blue-500', 'focus:ring-blue-500', 'sm:text-sm');
+        }
+    });
+});
+</script>
+{% endblock %}

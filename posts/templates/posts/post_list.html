@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">{{ target_category.name }}</h1>
+        <p class="text-gray-500">총 {{ posts.count }}개의 게시글이 있습니다.</p>
+    </div>
+
+    <div class="my-4 flex flex-wrap gap-2">
+        <a href="{% url 'board_index' %}" class="px-3 py-1 text-sm font-medium text-gray-700 bg-white border rounded-md hover:bg-gray-50">포털 메인</a>
+        {% for c in categories %}
+            <a href="{% url 'post_list_by_category' c.id %}" class="px-3 py-1 text-sm font-medium rounded-md border {% if c == target_category %}bg-blue-600 text-white border-blue-600{% else %}bg-white text-gray-700 hover:bg-gray-50{% endif %}">
+                {{ c.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">번호</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-7/12">제목</th>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">글쓴이</th>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">작성일</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for post in posts %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ post.pk }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <a href="{% url 'post_detail' pk=post.pk %}" class="hover:text-blue-600">{{ post.title }}</a>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                        {% if post.author %}
+                            {{ post.author.username }}
+                        {% else %}
+                            (알 수 없음)
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ post.created_at|date:"Y-m-d" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="px-6 py-12 text-center text-gray-500">게시글이 없습니다.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex justify-end mt-4">
+        <a href="{% url 'post_create' %}" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700">새 글 작성</a>
+    </div>
+</div>
+{% endblock %}
