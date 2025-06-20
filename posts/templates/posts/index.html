@@ -6,7 +6,7 @@
         {% if user.is_authenticated %}
             <a href="{% url 'post_create' %}" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700">글쓰기</a>
         {% else %}
-            <a href="{% url 'login' %}?next={% url 'post_create' %}" class="px-4 py-2 bg-gray-400 text-white font-semibold rounded-md hover:bg-gray-500" onclick="alert('로그인 후 글쓰기가 가능합니다.');">글쓰기</a>
+            <a href="{% url 'accounts:login' %}?next={% url 'post_create' %}" class="px-4 py-2 bg-gray-400 text-white font-semibold rounded-md hover:bg-gray-500" onclick="alert('로그인 후 글쓰기가 가능합니다.');">글쓰기</a>
         {% endif %}
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-center">

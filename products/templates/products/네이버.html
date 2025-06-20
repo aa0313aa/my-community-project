@@ -109,13 +109,13 @@
     <a href="/customer/" class="text-gray-700 hover:text-blue-700">고객센터</a>
     {% if user.is_authenticated %}
       <span class="text-gray-700">안녕하세요, {{ user.username }}님</span>
-      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+      <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
         {% csrf_token %}
         <button type="submit" class="text-gray-700 hover:text-blue-700 bg-transparent border-none p-0 m-0 cursor-pointer">로그아웃</button>
       </form>
     {% else %}
-      <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-700">로그인</a>
-      <a href="{% url 'signup' %}" class="text-gray-700 hover:text-blue-700">회원가입</a>
+      <a href="{% url 'accounts:login' %}" class="text-gray-700 hover:text-blue-700">로그인</a>
+      <a href="{% url 'accounts:signup' %}" class="text-gray-700 hover:text-blue-700">회원가입</a>
     {% endif %}
   </div>
 </nav>
@@ -266,7 +266,7 @@
             <details class="group border-b border-gray-200 naver-green-border">
                 <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
                   <span>이용 한도는 변경될 수 있나요?</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke-currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                   </svg>
                 </summary>

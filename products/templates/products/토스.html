@@ -90,13 +90,13 @@
     <a href="/customer/" class="text-gray-700 hover:text-blue-700">고객센터</a>
     {% if user.is_authenticated %}
       <span class="text-gray-700">안녕하세요, {{ user.username }}님</span>
-      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+      <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
         {% csrf_token %}
         <button type="submit" class="text-gray-700 hover:text-blue-700 bg-transparent border-none p-0 m-0 cursor-pointer">로그아웃</button>
       </form>
     {% else %}
-      <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-700">로그인</a>
-      <a href="{% url 'signup' %}" class="text-gray-700 hover:text-blue-700">회원가입</a>
+      <a href="{% url 'accounts:login' %}" class="text-gray-700 hover:text-blue-700">로그인</a>
+      <a href="{% url 'accounts:signup' %}" class="text-gray-700 hover:text-blue-700">회원가입</a>
     {% endif %}
   </div>
 </nav>
