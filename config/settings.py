@@ -111,6 +111,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "products",
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # 미디어 파일 설정 추가
 MEDIA_URL = '/media/'
