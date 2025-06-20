@@ -6,6 +6,18 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        {% if form.errors %}
+            <div class="text-red-600 mt-2">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div>{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded mt-4">회원가입</button>
     </form>
     <div class="mt-4 text-center">
